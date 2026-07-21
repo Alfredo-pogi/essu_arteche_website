@@ -1,224 +1,544 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Student Profile | ESSU-AEC</title>
-    <link rel="stylesheet" href="profile.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Profile · boyish aesthetic</title>
+  <!-- Font Awesome for icons (boyish touch) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Font: Inter + Playfair Display for contrast -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet" />
+  <style>
+    /* ----- RESET & BASE ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f0ebe4;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #1e1c26;
+      padding: 2rem 1.2rem;
+      display: flex;
+      justify-content: center;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1300px;
+      width: 100%;
+      background: #fcf9f4;
+      border-radius: 40px 40px 32px 32px;
+      box-shadow: 0 24px 48px -16px rgba(0,0,0,0.12), 0 8px 20px -8px rgba(0,0,0,0.04);
+      padding: 2rem 2.2rem 1.8rem;
+      transition: all 0.2s;
+    }
+
+    /* ----- TYPOGRAPHY (boyish) ----- */
+    h1, h2, h3 {
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #25222e;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 4px solid #ddd2c2;
+      padding-bottom: 0.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 i {
+      color: #6b5e4b;
+      font-size: 2.2rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      margin: 1.2rem 0 0.7rem;
+      color: #2f2a3b;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-left: 6px solid #b9ab96;
+      padding-left: 0.9rem;
+    }
+
+    h2 i {
+      color: #7f6e58;
+      font-size: 1.3rem;
+    }
+
+    /* ----- HEADER & NAV (integrated) ----- */
+    .page-header {
+      margin-bottom: 0.4rem;
+    }
+
+    .page-header p {
+      color: #3f3845;
+      font-size: 1rem;
+      margin-bottom: 0.8rem;
+      background: #f2ede4;
+      padding: 0.3rem 1.2rem;
+      border-radius: 60px;
+      display: inline-block;
+      border: 1px solid #e3dad0;
+    }
+
+    .main-nav {
+      background: #e8e0d4;
+      padding: 0.6rem 1.8rem;
+      border-radius: 60px;
+      margin: 0.6rem 0 1.8rem;
+      box-shadow: inset 0 1px 6px rgba(255,255,255,0.6), 0 6px 12px rgba(0,0,0,0.02);
+    }
+
+    .main-nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.2rem;
+      list-style: none;
+      justify-content: center;
+    }
+
+    .main-nav a {
+      text-decoration: none;
+      color: #2b2633;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: 0.15s;
+      padding: 0.3rem 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    .main-nav a i {
+      margin-right: 6px;
+      color: #6b5e4b;
+    }
+
+    .main-nav a:hover {
+      border-bottom-color: #7f6e58;
+      color: #16131f;
+    }
+
+    /* ----- SPLIT LAYOUT (left / right) ----- */
+    .profile-split-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 0.5rem 0 1.8rem;
+    }
+
+    /* ----- CARDS & SECTIONS ----- */
+    .profile-card, .info-section {
+      background: #f6f2eb;
+      border-radius: 28px;
+      padding: 1.6rem 1.8rem;
+      border: 1px solid #e7dfd3;
+      box-shadow: 0 6px 16px -10px rgba(0,0,0,0.06);
+      transition: 0.2s;
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-card:hover, .info-section:hover {
+      border-color: #cdc0ae;
+      box-shadow: 0 12px 24px -14px rgba(60,50,40,0.08);
+    }
+
+    .profile-photo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .profile-photo img {
+      border-radius: 60px;
+      background: #d9d0c0;
+      padding: 0.2rem;
+      border: 3px solid #b9ab96;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .personal-info p {
+      margin: 0.25rem 0;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .personal-info strong {
+      color: #2f2a3b;
+      min-width: 120px;
+    }
+
+    .info-section ul, .info-section ol {
+      padding-left: 1.2rem;
+      margin: 0.4rem 0;
+    }
+
+    .info-section li {
+      padding: 0.25rem 0;
+      border-bottom: 1px dashed #d6cbbe;
+    }
+
+    .info-section li:last-child {
+      border-bottom: none;
+    }
+
+    /* ----- TABLE (subjects) ----- */
+    .subjects-table table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .subjects-table th {
+      background: #ddd2c2;
+      color: #25222e;
+      padding: 0.6rem 0.4rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .subjects-table td {
+      padding: 0.6rem 0.4rem;
+      border-bottom: 1px solid #d6cbbe;
+    }
+
+    .subjects-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* ----- FULL WIDTH sections (contact + map) ----- */
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    /* ----- CONTACT FORM (boyish style) ----- */
+    .contact-form form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem 1.8rem;
+      margin-top: 0.6rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: #3b3241;
+      margin-bottom: 0.2rem;
+    }
+
+    .form-group input, 
+    .form-group select, 
+    .form-group textarea {
+      background: #fcfaf6;
+      border: 1px solid #d6cbbe;
+      border-radius: 40px;
+      padding: 0.6rem 1.2rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      transition: 0.2s;
+      outline: none;
+    }
+
+    .form-group input:focus, 
+    .form-group select:focus, 
+    .form-group textarea:focus {
+      border-color: #9a897a;
+      box-shadow: 0 0 0 3px rgba(127, 110, 88, 0.1);
+      background: white;
+    }
+
+    .form-group textarea {
+      border-radius: 24px;
+      resize: vertical;
+    }
+
+    .radio-group, .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding-top: 0.2rem;
+    }
+
+    .radio-group label, .checkbox-group label {
+      font-weight: 400;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .form-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.6rem;
+    }
+
+    .form-actions input {
+      background: #3b3241;
+      border: none;
+      color: #f2ede6;
+      font-weight: 600;
+      padding: 0.7rem 2rem;
+      border-radius: 60px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: 0.2s;
+      border: 1px solid #2b2633;
+      flex: 0 1 auto;
+    }
+
+    .form-actions input[type="reset"] {
+      background: #d9d0c0;
+      color: #2b2633;
+      border-color: #b9ab96;
+    }
+
+    .form-actions input:hover {
+      transform: scale(0.97);
+      filter: brightness(0.96);
+    }
+
+    /* ----- SCHOOL LOCATION (map mimic) ----- */
+    .location-iframe iframe {
+      border-radius: 28px;
+      border: 2px solid #d9cebf;
+      background: #e8e0d4;
+      height: 280px;
+      width: 100%;
+    }
+
+    /* ----- FOOTER ----- */
+    .page-footer {
+      margin-top: 2.4rem;
+      padding-top: 1rem;
+      border-top: 4px solid #e3dad0;
+      text-align: center;
+      color: #4d4453;
+      font-weight: 400;
+      font-size: 0.9rem;
+    }
+
+    .page-footer span {
+      font-weight: 600;
+      color: #2b2633;
+    }
+
+    /* ----- responsive ----- */
+    @media (max-width: 780px) {
+      .container { padding: 1.2rem 1rem; }
+      .profile-split-container { grid-template-columns: 1fr; gap: 0.8rem; }
+      .main-nav ul { gap: 1rem; justify-content: center; }
+      .personal-info strong { min-width: 100px; }
+      .form-actions { flex-wrap: wrap; }
+      .form-actions input { flex: 1 1 auto; }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.8rem; }
+      .main-nav { padding: 0.4rem 0.8rem; }
+      .main-nav ul { gap: 0.6rem; font-size: 0.8rem; }
+    }
+
+    /* small boyish badge */
+    .badge-light {
+      background: #ddd2c2;
+      color: #2b2633;
+      padding: 0.1rem 1rem;
+      border-radius: 60px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+  </style>
 </head>
-
 <body>
+<div class="container">
 
-    <!-- ============================================================ -->
-    <!-- HEADER                                                       -->
-    <!-- ============================================================ -->
+  <!-- ===== HEADER ===== -->
+  <header class="page-header">
+    <h1><i class="fas fa-tshirt"></i> student profile</h1>
+    <p>
+      <i class="fas fa-graduation-cap" style="margin-right: 6px;"></i>
+      Eastern Samar State University – Arteche Extension Campus
+    </p>
+  </header>
 
-    <header class="page-header">
-        <h1>Student Profile</h1>
-        <p>
-            This page contains the profile information of a student enrolled at
-            <strong>Eastern Samar State University – Arteche Extension Campus</strong>.
-        </p>
-    </header>
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="main-nav">
+    <ul>
+      <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="#"><i class="fas fa-user-astronaut"></i> About</a></li>
+      <li><a href="#"><i class="fas fa-book-open"></i> Academics</a></li>
+      <li><a href="#"><i class="fas fa-tree"></i> Campus Life</a></li>
+      <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+    </ul>
+  </nav>
 
-    <!-- ============================================================ -->
-    <!-- NAVIGATION                                                   -->
-    <!-- ============================================================ -->
+  <!-- ===== MAIN ===== -->
+  <main class="main-body">
 
-    <nav class="main-nav">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="academics.html">Academics</a></li>
-            <li><a href="campus-life.html">Campus Life</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
+    <!-- split container -->
+    <div class="profile-split-container">
 
-    <!-- ============================================================ -->
-    <!-- MAIN CONTENT                                                 -->
-    <!-- ============================================================ -->
+      <!-- LEFT COLUMN -->
+      <section class="left-column">
 
-    <main class="main-body">
+        <!-- Profile card -->
+        <div class="profile-card">
+          <div class="profile-photo">
+            <img src="data:image/assets/default images>
+          </div>
+          <div class="personal-info">
+            <h2 style="border-left: none; padding-left:0; margin-top:0;"><i class="fas fa-id-card"></i> personal info</h2>
+            <p><strong>Full Name:</strong> Busa, Mark Alfred</p>
+            <p><strong>Student #:</strong> 23-04718</p>
+            <p><strong>Program:</strong> BS Information Technology</p>
+            <p><strong>Year Level:</strong> Forth Year</p>
+            <p><strong>Email:</strong> markalfredbusa11@gmail.com</p>
+            <p><strong>Address:</strong> Brgy Rawis Can-Avid E. Samar, PH</p>
+          </div>
+        </div>
 
-        <!-- Split Layout Container (Left & Right Columns) -->
-        <div class="profile-split-container">
-
-            <!-- -------- LEFT COLUMN -------- -->
-            <section class="left-column">
-
-                <!-- Profile Info -->
-                <div class="profile-card">
-                    <div class="profile-photo">
-                        <img src="./assets/images/default.png" alt="Student Picture" width="200" height="200" />
-                    </div>
-                    <div class="personal-info">
-                        <h2>Personal Information</h2>
-                        <p><strong>Full Name:</strong> Pedro San Juan</p>
-                        <p><strong>Student Number:</strong> 2024-0001</p>
-                        <p><strong>Program:</strong> Bachelor of Science in Information Technology</p>
-                        <p><strong>Year Level:</strong> Second Year</p>
-                        <p><strong>Email:</strong> juandelacruz@email.com</p>
-                        <p><strong>Address:</strong> Cebu City, Philippines</p>
-                    </div>
-                </div>
-
-                <!-- Biography -->
-                <section class="info-section">
-                    <h2>Biography</h2>
-                    <p>
-                        Juan Dela Cruz is currently taking Bachelor of Science in Information
-                        Technology. He enjoys learning web development, programming,
-                        database management, and networking.
-                    </p>
-                </section>
-
-                <!-- Skills -->
-                <section class="info-section">
-                    <h2>Skills</h2>
-                    <ul>
-                        <li>HTML</li>
-                        <li>CSS</li>
-                        <li>JavaScript</li>
-                        <li>Microsoft Office</li>
-                        <li>Problem Solving</li>
-                    </ul>
-                </section>
-
-                <!-- Educational Background -->
-                <section class="info-section">
-                    <h2>Educational Background</h2>
-                    <ol>
-                        <li>Elementary</li>
-                        <li>Junior High School</li>
-                        <li>Senior High School</li>
-                        <li>College</li>
-                    </ol>
-                </section>
-
-            </section>
-
-            <!-- -------- RIGHT COLUMN -------- -->
-            <section class="right-column">
-
-                <!-- Current Subjects (table) -->
-                <section class="info-section subjects-table">
-                    <h2>Current Subjects</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Course Code</th>
-                                <th>Description</th>
-                                <th>Instructor</th>
-                                <th>Schedule</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>IT413 / Elective 3*</td>
-                                <td>Web Systems and Technologies</td>
-                                <td>Mr. Silla</td>
-                                <td>MW 7:30 AM</td>
-                            </tr>
-                            <tr>
-                                <td>Comp 212</td>
-                                <td>Object Oriented Programming</td>
-                                <td>Mr. Silla</td>
-                                <td>TTH 10:00 AM</td>
-                            </tr>
-                            <tr>
-                                <td>IT 314 / Elective 1*</td>
-                                <td>Advanced Database Systems</td>
-                                <td>Mr. Silla</td>
-                                <td>MWF 2:00 PM</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
-
-            </section>
-
-        </div> <!-- End of Split Layout Container -->
-
-        <!-- -------- FULL WIDTH SECTIONS -------- -->
-
-        <!-- Contact Form -->
-        <section class="info-section contact-form full-width">
-            <h2>Contact the Student</h2>
-            <form>
-                <div class="form-group">
-                    <label for="fullname">Full Name:</label>
-                    <input type="text" id="fullname" name="fullname" />
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email Address:</label>
-                    <input type="email" id="email" name="email" />
-                </div>
-
-                <div class="form-group">
-                    <label for="course">Course:</label>
-                    <select id="course" name="course">
-                        <option>BSIT</option>
-                        <option>BSEd</option>
-                        <option>BEEd</option>
-                        <option>BSHM</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Gender</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="gender" value="male" /> Male</label>
-                        <label><input type="radio" name="gender" value="female" /> Female</label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Interests</label>
-                    <div class="checkbox-group">
-                        <label><input type="checkbox" name="interests" value="programming" /> Programming</label>
-                        <label><input type="checkbox" name="interests" value="networking" /> Networking</label>
-                        <label><input type="checkbox" name="interests" value="multimedia" /> Multimedia</label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="4"></textarea>
-                </div>
-
-                <div class="form-actions">
-                    <input type="submit" value="Submit" />
-                    <input type="reset" value="Clear" />
-                </div>
-            </form>
+        <!-- Biography -->
+        <section class="info-section">
+          <h2><i class="fas fa-pen-fancy"></i> biography</h2>
+          <p>Busa Mark Alfred is a forth-year IT student with a passion for web systems, clean code, and retro gaming. He enjoys building side projects, tinkering with Linux, and collecting vintage denim jackets. "Code is poetry with a boyish twist."</p>
         </section>
 
-        <!-- School Location (iframe) -->
-        <section class="info-section location-iframe full-width">
-            <h2>School Location</h2>
-            <iframe
-                src="https://www.google.com"
-                width="100%"
-                height="350"
-                title="School Location Map">
-            </table>
-            <!-- Note: Fixed the closing tag below to match iframe standard -->
-            </iframe>
+        <!-- Skills -->
+        <section class="info-section">
+          <h2><i class="fas fa-code"></i> skills</h2>
+          <ul>
+            <li><i class="fas fa-check" style="color:#7f6e58; margin-right:8px;"></i>HTML &amp; CSS</li>
+            <li><i class="fas fa-check" style="color:#7f6e58; margin-right:8px;"></i>JavaScript (vanilla)</li>
+            <li><i class="fas fa-check" style="color:#7f6e58; margin-right:8px;"></i>PHP / MySQL</li>
+            <li><i class="fas fa-check" style="color:#7f6e58; margin-right:8px;"></i>UI/UX design</li>
+            <li><i class="fas fa-check" style="color:#7f6e58; margin-right:8px;"></i>Problem solving</li>
+          </ul>
         </section>
 
-    </main>
+        <!-- Educational Background -->
+        <section class="info-section">
+          <h2><i class="fas fa-school"></i> education</h2>
+          <ol>
+            <li>Elementary · Rawis Elementary School</li>
+            <li>Junior High · Can-Avid NHS</li>
+            <li>Senior High · Can-Avid NHS</li>
+            <li>College · ESSU-ARTECHE (current)</li>
+          </ol>
+        </section>
+      </section>
 
-    <!-- ============================================================ -->
-    <!-- FOOTER                                                       -->
-    <!-- ============================================================ -->
+      <!-- RIGHT COLUMN -->
+      <section class="right-column">
+        <!-- Current Subjects (table) -->
+        <section class="info-section subjects-table">
+          <h2><i class="fas fa-book-open"></i> current subjects</h2>
+          <table>
+            <thead>
+              <tr><th>Course Code</th><th>Description</th><th>Instructor</th><th>Schedule</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>IT413</td><td>Web Systems &amp; Tech</td><td>Mr. Silla</td><td>MW 7:30</td></tr>
+              <tr><td>Comp 212</td><td>OOP</td><td>Mr. Silla</td><td>TTH 10:00</td></tr>
+              <tr><td>IT 314</td><td>Advanced Database</td><td>Mr. Silla</td><td>MWF 2:00</td></tr>
+            </tbody>
+          </table>
+          <div style="margin-top:0.6rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <span class="badge-light"><i class="far fa-clock"></i> 3 subjects</span>
+            <span class="badge-light"><i class="fas fa-laptop"></i> 12 credits</span>
+          </div>
+        </section>
+      </section>
+    </div> <!-- end split -->
 
-    <footer class="page-footer">
-        <p>&copy; 2026 <span>ESSU – Arteche</span></p>
-    </footer>
+    <!-- ===== FULL WIDTH: CONTACT FORM ===== -->
+    <section class="info-section contact-form full-width">
+      <h2><i class="fas fa-paper-plane"></i> contact the student</h2>
+      <form>
+        <div class="form-group">
+          <label for="fullname"><i class="far fa-user"></i> Full Name</label>
+          <input type="text" id="fullname" placeholder="Pedro San Juan" value="Busa Mark Alfred" />
+        </div>
+        <div class="form-group">
+          <label for="email"><i class="far fa-envelope"></i> Email</label>
+          <input type="email" id="email" placeholder="pedro@edu.ph" value="Alfred@edu.ph" />
+        </div>
+        <div class="form-group">
+          <label for="course"><i class="fas fa-graduation-cap"></i> Course</label>
+          <select id="course">
+            <option>BSIT</option>
+            <option>BSEd</option>
+            <option>BEEd</option>
+            <option>BSHM</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-venus-mars"></i> Gender</label>
+          <div class="radio-group">
+            <label><input type="radio" name="gender" value="male" checked /> Male</label>
+            <label><input type="radio" name="gender" value="female" /> Female</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-heart"></i> Interests</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" checked /> Programming</label>
+            <label><input type="checkbox" /> Networking</label>
+            <label><input type="checkbox" /> Multimedia</label>
+          </div>
+        </div>
+        <div class="form-group" style="grid-column: 1 / -1;">
+          <label for="message"><i class="far fa-comment-dots"></i> Message</label>
+          <textarea id="message" rows="3" placeholder="Say something boyish...">Hey Pedro, love the aesthetic! Let's collaborate.</textarea>
+        </div>
+        <div class="form-actions">
+          <input type="submit" value="Submit" />
+          <input type="reset" value="Clear" />
+        </div>
+      </form>
+    </section>
 
+    <!-- ===== FULL WIDTH: SCHOOL LOCATION ===== -->
+    <section class="info-section location-iframe full-width">
+      <h2><i class="fas fa-map-pin"></i> school location</h2>
+      <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=124.5%2C11.0%2C125.0%2C11.5&layer=mapnik" 
+              width="100%" height="280" style="border:2px solid #d9cebf; border-radius:28px;" 
+              allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              title="ESSU-Arteche location"></iframe>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="page-footer">
+    <p><i class="far fa-copyright"></i> 2026 · <span>ESSU – Arteche</span>  <i class="fas fa-tshirt" style="margin-left: 10px;"></i> boyish vibes</p>
+  </footer>
+
+</div> <!-- end container -->
 </body>
-
 </html>
+
+                    
+
+                        
+
+            
